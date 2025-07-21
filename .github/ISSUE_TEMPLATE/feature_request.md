@@ -21,5 +21,7 @@ assignees: ''
 <!-- [Optional] Any visual diagrams of the desired user interface. -->
 
 ---
-**[Contributor Guide](https://docs.meshery.io/project/contributing)**
+**[Contributor Guide](https://layer5.io/community/handbook/contribution)**
+- 📚 [Instructions for contributing to documentation](https://github.com/layer5io/layer5/blob/master/CONTRIBUTING.md)
+   - Layer5 documentation [site](https://docs.layer5.io/) and [source](https://github.com/layer5io/docs)
 - 🎨 Wireframes and [designs for Layer5 site](https://www.figma.com/file/5ZwEkSJwUPitURD59YHMEN/Layer5-Designs) in Figma [(open invite)](https://www.figma.com/team_invite/redeem/qJy1c95qirjgWQODApilR9)
