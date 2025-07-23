@@ -19,7 +19,7 @@ assignees: ''
 
 ---
 #### 📚 Layer5 Contribution & Academy Resources
-- 📖 [Contribution Guide](https://github.com/layer5io/layer5/blob/master/CONTRIBUTING.md)
+- 📖 [Contribution Guide](https://layer5.io/community/handbook/contribution)
 - 🗂 [Layer5 Documentation Site](https://docs.layer5.io/)
 - 🧑‍💻 [Layer5 Docs Source Code](https://github.com/layer5io/docs)
 
