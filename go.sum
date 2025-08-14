@@ -4,6 +4,8 @@ github.com/layer5io/academy-theme v0.2.8 h1:iJmAQM5jGLbpSyOAgKOpaAX6GE8AuqOz6Jm/
 github.com/layer5io/academy-theme v0.2.8/go.mod h1:Dv72UWsREOvX4Zg4mJjrpoyDxdgxxpiDotxqYBXMjXo=
 github.com/layer5io/academy-theme v0.3.0 h1:kDLXZXiiLMH23TY0HCDVa064XHVkxLsbaS9eRohR03k=
 github.com/layer5io/academy-theme v0.3.0/go.mod h1:Dv72UWsREOvX4Zg4mJjrpoyDxdgxxpiDotxqYBXMjXo=
+github.com/layer5io/academy-theme v0.3.1 h1:WOD9PYpcj81vv9hkrlYn2ts09GiZCk6WxqaBWuWdoCk=
+github.com/layer5io/academy-theme v0.3.1/go.mod h1:Dv72UWsREOvX4Zg4mJjrpoyDxdgxxpiDotxqYBXMjXo=
 github.com/layer5io/digitalocean-academy v0.0.0-20250811164829-9c9fe0d0fb30 h1:uOYEZhHFszNjb0ceanoSk118T+6KAFcTopZGYNSVLeQ=
 github.com/layer5io/digitalocean-academy v0.0.0-20250811164829-9c9fe0d0fb30/go.mod h1:HwJAxS+mg1K33NKaDIngdVhya6+GPAraeTyi6g+4268=
 github.com/layer5io/digitalocean-academy v0.1.1 h1:cYIV8WZGCUHxrEg1NtXtqIhvQuWVbvlGmzl6knsS6So=
