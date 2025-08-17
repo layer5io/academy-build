@@ -10,7 +10,7 @@
     },
     "11111111-1111-1111-1111-111111111111": {
       "module": "github.com/layer5io/layer5-academy",
-      "version": "v0.5.0"
+      "version": "v0.5.1"
     },
     "3e2f9c82-1a4c-4781-adf9-99ec22cd994e": {
       "module": "github.com/layer5io/digitalocean-academy",
