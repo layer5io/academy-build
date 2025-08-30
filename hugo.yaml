@@ -72,6 +72,11 @@ outputs:
 
 
 params:
+  # controls the type of build you are doing. Options are "development" and "production"
+  # in production builds, we assume that the site is being built to be server under cloud .
+  # use "development" when building the site for local testing.
+  build: "production"
+
   taxonomy:
     # set taxonomyCloud = [] to hide taxonomy clouds
     taxonomyCloud: [tags, categories]
