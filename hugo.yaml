@@ -72,6 +72,11 @@ outputs:
 
 
 params:
+  # controls the type of build you are doing. Options are "development" and "production"
+  # use "production" when building academy to for production experience 
+  # use "development" when building the site for local authoring experience.
+  build: "production"
+
   taxonomy:
     # set taxonomyCloud = [] to hide taxonomy clouds
     taxonomyCloud: [tags, categories]
