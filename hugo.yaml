@@ -73,8 +73,8 @@ outputs:
 
 params:
   # controls the type of build you are doing. Options are "development" and "production"
-  # in production builds, we assume that the site is being built to be server under cloud .
-  # use "development" when building the site for local testing.
+  # use "production" when building academy to for production experience 
+  # use "development" when building the site for local authoring experience.
   build: "production"
 
   taxonomy:
