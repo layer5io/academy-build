@@ -31,6 +31,10 @@ setup:
 build:
 	hugo build
 
+## Local: Build site for local consumption remove files from destination not found in static directories
+build-clean:
+	hugo build --cleanDestinationDir
+
 ## Local: Build and run site locally with draft and future content enabled.
 site: check-go
 	hugo server -D -F
