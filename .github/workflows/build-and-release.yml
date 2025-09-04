@@ -40,7 +40,7 @@ jobs:
         if: ${{ github.event.inputs.orgId != '' }}
         run: |
           ORG_ID="${{ github.event.inputs.orgId }}"
-          VERSION="${{ github.event.inputs.version || 'latest' }}""
+          VERSION="${{ github.event.inputs.version || 'latest' }}"
           MODULE=$(jq -r --arg orgId "$ORG_ID" '.orgToModuleMapping[$orgId].module' academy_config.json)
 
           if [ "$MODULE" = "null" ] || [ -z "$MODULE" ]; then
