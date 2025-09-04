@@ -19,8 +19,6 @@ on:
     paths-ignore:
       - '.github/**'
       - README.md
-  repository_dispatch:
-    types: [academy-release]
 
 jobs:
   build-artifacts:
@@ -42,7 +40,7 @@ jobs:
         if: ${{ github.event.inputs.orgId != '' }}
         run: |
           ORG_ID="${{ github.event.inputs.orgId }}"
-          VERSION="${{ github.event.inputs.version || github.event.client_payload.version || 'latest' }}
+          VERSION="${{ github.event.inputs.version || 'latest' }}
           MODULE=$(jq -r --arg orgId "$ORG_ID" '.orgToModuleMapping[$orgId].module' academy_config.json)
 
           if [ "$MODULE" = "null" ] || [ -z "$MODULE" ]; then
@@ -90,7 +88,7 @@ jobs:
         if: github.event_name == 'repository_dispatch'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "[academy] Update academy content v${{ github.event.client_payload.version || github.event.inputs.version || 'latest' }} for orgId: ${{ github.event.client_payload.orgId || github.event.inputs.orgId || 'manual' }} - ${{ github.event.client_payload.notes || 'No notes provided' }} [CI]"
+          commit_message: "Update academy content from orgId: ${{ github.event.inputs.orgId || 'manual' }} [CI]"
           commit_options: '--signoff'
           repository: meshery-cloud
           branch: master
@@ -99,3 +97,15 @@ jobs:
           commit_user_email: github-actions@github.com
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+      - name: Create PR in meshery-cloud for release-drafter integration
+        if: github.event.inputs.version != ''
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          path: meshery-cloud
+          commit-message: "Add academy release: ${{ github.event.inputs.notes || 'Updated academy content' }} for v${{ github.event.inputs.version || 'latest' }} [CI]"
+          title: "${{ github.event.inputs.notes || 'Updated academy content' }}"
+          body: "Automated PR for academy release v${{ github.event.inputs.version || 'latest' }} from academy-build. OrgId: ${{ github.event.inputs.orgId || 'manual' }}."
+          branch: academy-release-v${{ github.event.inputs.version || 'latest' }}
+          labels: academy
+
