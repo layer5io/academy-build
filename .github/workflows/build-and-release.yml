@@ -96,3 +96,15 @@ jobs:
           commit_user_email: github-actions@github.com
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+      - name: Create PR in meshery-cloud for release-drafter integration
+        if: github.event.inputs.version != ''
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          path: meshery-cloud
+          commit-message: "Add ${ACADEMY_NAME} release v${{ github.event.inputs.version || 'latest' }}: $NOTES [CI]"
+          title: "${ACADEMY_NAME} v${{ github.event.inputs.version || 'latest' }}: $NOTES"
+          body: "Automated PR for ${ACADEMY_NAME} release v${{ github.event.inputs.version || 'latest' }} from academy-build. OrgId: ${{ github.event.inputs.orgId || 'manual' }}."
+          branch: academy-release-v${{ github.event.inputs.version || 'latest' }}
+          labels: academy
+
