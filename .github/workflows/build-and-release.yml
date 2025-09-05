@@ -96,8 +96,10 @@ jobs:
           commit_user_email: github-actions@github.com
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+
       - name: Create PR in meshery-cloud for release-drafter integration
         if: github.event.inputs.version != ''
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
@@ -108,3 +110,21 @@ jobs:
           branch: academy-release-v${{ github.event.inputs.version || 'latest' }}
           labels: academy
 
+      - name: Auto-merge PR in meshery-cloud repo
+        if: github.event.inputs.version != ''
+        run: |
+          PR_NUMBER=$(jq -r .pull_request_number <<< "${{ steps.cpr.outputs.pull-request-number }}")
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
+            PR_NUMBER=$(jq -r .pull_request_number <<< "${{ steps.cpr.outputs.pr }}" || true)
+          fi
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
+            PR_NUMBER="${{ steps.cpr.outputs.pull-request-number }}"
+          fi
+          if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+            gh pr merge "$PR_NUMBER" --merge --repo layer5io/meshery-cloud --admin --delete-branch
+          else
+            echo "No PR created to auto-merge."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+        working-directory: meshery-cloud
