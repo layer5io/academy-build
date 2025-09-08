@@ -103,9 +103,9 @@ jobs:
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
-          commit-message: "Add academy update from build [CI]"
-          title: "Academy update"
-          body: "Automated PR for academy content update from academy-build. OrgId: ${{ github.event.inputs.orgId || 'manual' }}."
+          commit-message: "Add Academy release v${{ github.event.inputs.version || 'latest' }} ${{ github.event.inputs.NOTES || '' }} [CI]"
+          title: "Academy v${{ github.event.inputs.version || 'latest' }} ${{ github.event.inputs.NOTES || '' }}"
+          body: "Automated PR for Academy release v${{ github.event.inputs.version || 'latest' }} from academy-build. OrgId: ${{ github.event.inputs.orgId || 'manual' }}."
           branch: academy-release-v${{ github.event.inputs.version || 'latest' }}
           labels: academy
 
