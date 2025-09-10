@@ -129,8 +129,8 @@ jobs:
           commit-message: "[Academy] Academy content update v${{ github.event.inputs.version }}"
           # committer: l5io
           signoff: true
-          title: "${{ github.event.inputs.academy-name }} ${{ github.event.inputs.version }} content update"
-          body: "Automated PR for ${{ github.event.inputs.academy-name }} ${{ github.event.inputs.version }}  (organization: ${{ github.event.inputs.orgId || 'manual' }})."
+          title: "${{ inputs.academy-name || github.event.inputs.academy-name }} ${{ github.event.inputs.version }} content update"
+          body: "Automated PR for ${{ inputs.academy-name || github.event.inputs.academy-name }} ${{ github.event.inputs.version }}  (organization: ${{ github.event.inputs.orgId || 'manual' }})."
           # branch: academy-${{ github.event.inputs.version }}-${{ github.run_number }}
           labels: academy
           delete-branch: true
