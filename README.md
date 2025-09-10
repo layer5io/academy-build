@@ -28,6 +28,7 @@ You can integrate this into your workflows after building your site or on versio
 | --------- | -------- | ------------------------------------------------------------------------------ |
 | `orgId`   | ✅ Yes    | The organization ID to update academy content for.                             |
 | `token`   | ✅ Yes    | Bearer token for authenticating the API call. Store it securely using secrets. |
+| `academy-name` | ❌ No     | The name of the Academy being updated (e.g., Layer5 Academy). Defaults to `"Academy"` if not specified.        |
 | `version` | ❌ No     | Module version to be updated. Defaults to `"latest"` if not specified.         |
 
 ---
@@ -57,15 +58,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
      
       - name: Call Layer5 Academy Update API
-        uses: layer5io/academy-build@v0.1.3
+        uses: layer5io/academy-build@v0.1.5
         with:
           orgId: 'your-org-id'
           token: ${{ secrets.ACADEMY_API_TOKEN }}
           version: ${{ github.ref_name }}
+          academy-name: 'your-academy-name' # Layer5 Academy
 
       - name: Print API response
         run: echo "${{ steps.update.outputs.response }}"
