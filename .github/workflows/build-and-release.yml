@@ -12,7 +12,11 @@ on:
         required: false
         default: 'latest'
         type: string
-
+      academy-name:
+        description: 'The name of the Academy being updated (e.g., Layer5 Academy)'
+        required: false
+        default: 'Academy'
+        type: string
   push:
     branches:
       - master
@@ -123,8 +127,10 @@ jobs:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
           commit-message: "[Academy] Academy content update v${{ github.event.inputs.version }}"
-          title: "Academy ${{ github.event.inputs.version }}: Content update"
-          body: "Automated PR for Academy ${{ github.event.inputs.version }} for organization: ${{ github.event.inputs.orgId || 'manual' }}."
+          # committer: l5io
+          signoff: true
+          title: "${{ github.event.inputs.academy-name }} ${{ github.event.inputs.version }} content update"
+          body: "Automated PR for ${{ github.event.inputs.academy-name }} ${{ github.event.inputs.version }}  (organization: ${{ github.event.inputs.orgId || 'manual' }})."
           # branch: academy-${{ github.event.inputs.version }}-${{ github.run_number }}
           labels: academy
           delete-branch: true
