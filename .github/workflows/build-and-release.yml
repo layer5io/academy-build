@@ -26,12 +26,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: 'master'
 
       - name: Setup Hugo (Extended)
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.147.9'
           extended: true
@@ -82,7 +82,7 @@ jobs:
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
 
       - name: Checkout meshery-cloud repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: layer5io/meshery-cloud
           token: ${{ secrets.GH_ACCESS_TOKEN }}
@@ -98,13 +98,13 @@ jobs:
       - name: Commit & push academy to meshery-cloud
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Update academy content from orgId: ${{ github.event.inputs.orgId || 'manual' }} [CI]"
+          commit_message: "[Academy] Content upddate for orgId: ${{ github.event.inputs.orgId || 'manual' }}"
           commit_options: '--signoff'
           repository: meshery-cloud
-          branch: master
+          branch: academy/content-update
           file_pattern: academy
-          commit_user_name: GitHub Actions
-          commit_user_email: github-actions@github.com
+          commit_user_name: l5io
+          commit_user_email: l5io@layer5.io
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
 
@@ -115,10 +115,10 @@ jobs:
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
-          commit-message: "Add ${{ env.ACADEMY_NAME }} release v${{ github.event.inputs.version || 'latest' }}: ${{ env.NOTES }} [CI]"
+          commit-message: "[Academy] ${{ env.ACADEMY_NAME }} ${{ github.event.inputs.version || 'latest' }}: ${{ env.NOTES }}"
           title: "${{ env.ACADEMY_NAME }} v${{ github.event.inputs.version || 'latest' }}: ${{ env.NOTES }}"
-          body: "Automated PR for ${{ env.ACADEMY_NAME }} release v${{ github.event.inputs.version || 'latest' }} from academy-build. OrgId: ${{ github.event.inputs.orgId || 'manual' }}."
-          branch: academy-release-v${{ github.event.inputs.version || 'latest' }}
+          body: "Automated PR for ${{ env.ACADEMY_NAME }} ${{ github.event.inputs.version || 'latest' }} for organization: ${{ github.event.inputs.orgId || 'manual' }}."
+          branch: ${{ env.ACADEMY_NAME }}-${{ github.event.inputs.version || github.event.inputs.version }}
           labels: academy
 
       - name: Auto-merge PR in meshery-cloud repo
