@@ -63,6 +63,12 @@ jobs:
           echo "ACADEMY_NAME=Layer5 Academy" >> $GITHUB_ENV
           echo "NOTES=Manual build from academy-build workflow" >> $GITHUB_ENV
 
+      - name: Ensure environment variables are set
+        run: |
+          # Set defaults if variables are not already set
+          echo "ACADEMY_NAME=${ACADEMY_NAME:-Layer5 Academy}" >> $GITHUB_ENV
+          echo "NOTES=${NOTES:-Build from academy-build workflow}" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: make setup
 
@@ -87,6 +93,7 @@ jobs:
           repository: layer5io/meshery-cloud
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
+          ref: master
 
       - name: Copy build output to /academy
         run: |
@@ -98,10 +105,10 @@ jobs:
       - name: Commit & push academy to meshery-cloud
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "[Academy] Content upddate for orgId: ${{ github.event.inputs.orgId || 'manual' }}"
+          commit_message: "[Academy] Content update for orgId: ${{ github.event.inputs.orgId || 'manual' }}"
           commit_options: '--signoff'
           repository: meshery-cloud
-          branch: academy/content-update
+          branch: master
           file_pattern: academy
           commit_user_name: l5io
           commit_user_email: l5io@layer5.io
@@ -115,11 +122,12 @@ jobs:
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
-          commit-message: "[Academy] ${{ env.ACADEMY_NAME }} ${{ github.event.inputs.version || 'latest' }}: ${{ env.NOTES }}"
-          title: "${{ env.ACADEMY_NAME }} v${{ github.event.inputs.version || 'latest' }}: ${{ env.NOTES }}"
-          body: "Automated PR for ${{ env.ACADEMY_NAME }} ${{ github.event.inputs.version || 'latest' }} for organization: ${{ github.event.inputs.orgId || 'manual' }}."
-          branch: ${{ env.ACADEMY_NAME }}-${{ github.event.inputs.version || github.event.inputs.version }}
+          commit-message: "[Academy] Academy content update v${{ github.event.inputs.version }}"
+          title: "Academy v${{ github.event.inputs.version }}: Content update"
+          body: "Automated PR for Academy ${{ github.event.inputs.version }} for organization: ${{ github.event.inputs.orgId || 'manual' }}."
+          branch: academy-${{ github.event.inputs.version }}-${{ github.run_number }}
           labels: academy
+          delete-branch: true
 
       - name: Auto-merge PR in meshery-cloud repo
         if: github.event.inputs.version != ''
@@ -127,10 +135,11 @@ jobs:
           PR_NUMBER="${{ steps.cpr.outputs.pull-request-number }}"
           if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ] && [ "$PR_NUMBER" != "" ]; then
             echo "Auto-merging PR #$PR_NUMBER"
-            gh pr merge "$PR_NUMBER" --merge --repo layer5io/meshery-cloud --admin --delete-branch
+            gh pr merge "$PR_NUMBER" --merge --repo layer5io/meshery-cloud --delete-branch
+            echo "Successfully merged PR #$PR_NUMBER"
           else
             echo "No PR number found, skipping auto-merge."
+            exit 1
           fi
         env:
           GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-        working-directory: meshery-cloud
