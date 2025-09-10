@@ -28,6 +28,8 @@ github.com/layer5io/digitalocean-academy v0.1.7 h1:z9l/NZYD4igZwYUswjQ9S+U3wpuMc
 github.com/layer5io/digitalocean-academy v0.1.7/go.mod h1:mU1UGptxC+nnLu4bTJzNCKLaXw+dBHz5XCesyTipViA=
 github.com/layer5io/digitalocean-academy v0.1.8 h1:XQi2RO/fkldYyIal4rC1uLbpXvSH9kjtpuzHlMFM0xs=
 github.com/layer5io/digitalocean-academy v0.1.8/go.mod h1:mU1UGptxC+nnLu4bTJzNCKLaXw+dBHz5XCesyTipViA=
+github.com/layer5io/digitalocean-academy v0.1.9 h1:fCZ4/buEvKob6vwr0QJ8IyGlBcsGQBcGqO4oC1w3N9k=
+github.com/layer5io/digitalocean-academy v0.1.9/go.mod h1:mU1UGptxC+nnLu4bTJzNCKLaXw+dBHz5XCesyTipViA=
 github.com/layer5io/exoscale-academy v0.6.5 h1:ZC36fwf/AwaTLdCLsBcj0rafpDCfhf9UObUid5y7G2I=
 github.com/layer5io/exoscale-academy v0.6.5/go.mod h1:Plyt2oY6ptY2b/m0B3LthZ5yF62lsEz4iXuSiaZy+kE=
 github.com/layer5io/exoscale-academy v0.6.6 h1:JLxXBDas9dQNTqga9nfknnWsH1HmOF+hBSER4E0BEOU=
