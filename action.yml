@@ -8,6 +8,11 @@ inputs:
   token:
     description: 'Bearer token for authorization'
     required: true
+  academy-name:
+    description: 'The name of the Academy being updated (e.g., Layer5 Academy)'
+    required: false
+    default: 'Academy'
+    type: string    
   version:
     description: 'Version of the module to update. Defaults to "latest"'
     required: false
