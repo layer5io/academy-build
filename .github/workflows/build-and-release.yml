@@ -129,17 +129,11 @@ jobs:
           labels: academy
           delete-branch: true
 
-      - name: Auto-merge PR in meshery-cloud repo
-        if: github.event.inputs.version != ''
-        run: |
-          PR_NUMBER="${{ steps.cpr.outputs.pull-request-number }}"
-          if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ] && [ "$PR_NUMBER" != "" ]; then
-            echo "Auto-merging PR #$PR_NUMBER"
-            gh pr merge "$PR_NUMBER" --merge --repo layer5io/meshery-cloud --delete-branch
-            echo "Successfully merged PR #$PR_NUMBER"
-          else
-            echo "No PR number found, skipping auto-merge."
-            exit 1
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+      - name: Enable auto-merge for PR in meshery-cloud repo
+        if: github.event.inputs.version != '' && steps.cpr.outputs.pull-request-number != ''
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: merge
+          repository: layer5io/meshery-cloud
