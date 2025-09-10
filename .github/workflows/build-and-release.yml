@@ -93,7 +93,7 @@ jobs:
           repository: layer5io/meshery-cloud
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
-          ref: academy/content-update
+          ref: master
 
       - name: Copy build output to /academy
         run: |
