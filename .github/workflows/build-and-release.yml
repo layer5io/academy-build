@@ -93,7 +93,7 @@ jobs:
           repository: layer5io/meshery-cloud
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
-          ref: master
+          ref: academy/content-update
 
       - name: Copy build output to /academy
         run: |
@@ -102,18 +102,18 @@ jobs:
           rsync -av --delete public/ meshery-cloud/academy/
           cp  academy_config.json meshery-cloud/academy/
 
-      - name: Commit & push academy to meshery-cloud
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "[Academy] Content update for orgId: ${{ github.event.inputs.orgId || 'manual' }}"
-          commit_options: '--signoff'
-          repository: meshery-cloud
-          branch: master
-          file_pattern: academy
-          commit_user_name: l5io
-          commit_user_email: l5io@layer5.io
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+      # - name: Commit & push academy to meshery-cloud
+      #   uses: stefanzweifel/git-auto-commit-action@v5
+      #   with:
+      #     commit_message: "[Academy] Content update for orgId: ${{ github.event.inputs.orgId || 'manual' }}"
+      #     commit_options: '--signoff'
+      #     repository: meshery-cloud
+      #     branch: academy/content-update
+      #     file_pattern: academy
+      #     commit_user_name: l5io
+      #     commit_user_email: l5io@layer5.io
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Create PR in meshery-cloud for release-drafter integration
         if: github.event.inputs.version != ''
@@ -123,9 +123,9 @@ jobs:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
           commit-message: "[Academy] Academy content update v${{ github.event.inputs.version }}"
-          title: "Academy v${{ github.event.inputs.version }}: Content update"
+          title: "Academy ${{ github.event.inputs.version }}: Content update"
           body: "Automated PR for Academy ${{ github.event.inputs.version }} for organization: ${{ github.event.inputs.orgId || 'manual' }}."
-          branch: academy-${{ github.event.inputs.version }}-${{ github.run_number }}
+          # branch: academy-${{ github.event.inputs.version }}-${{ github.run_number }}
           labels: academy
           delete-branch: true
 
