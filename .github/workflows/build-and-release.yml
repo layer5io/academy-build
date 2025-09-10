@@ -33,7 +33,7 @@ jobs:
       - name: Setup Hugo (Extended)
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.147.9'
+          hugo-version: '0.146.0'
           extended: true
 
       - name: Conditionally update Hugo module based on orgId
@@ -49,8 +49,19 @@ jobs:
           fi
 
           echo "✅ Found module for orgId '$ORG_ID': $MODULE"
+          
+          # Set environment variables for later steps
+          echo "ACADEMY_NAME=${MODULE##*/}" >> $GITHUB_ENV
+          echo "NOTES=Updated from academy-build workflow" >> $GITHUB_ENV
+          
           make update-module  module="$MODULE" version="$VERSION"
           make update-org-to-module-version orgId="$ORG_ID" version="$VERSION"
+
+      - name: Set default environment variables
+        if: ${{ github.event.inputs.orgId == '' }}
+        run: |
+          echo "ACADEMY_NAME=Layer5 Academy" >> $GITHUB_ENV
+          echo "NOTES=Manual build from academy-build workflow" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: make setup
@@ -104,26 +115,21 @@ jobs:
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
-          commit-message: "Add ${ACADEMY_NAME} release v${{ github.event.inputs.version || 'latest' }}: $NOTES [CI]"
-          title: "${ACADEMY_NAME} v${{ github.event.inputs.version || 'latest' }}: $NOTES"
-          body: "Automated PR for ${ACADEMY_NAME} release v${{ github.event.inputs.version || 'latest' }} from academy-build. OrgId: ${{ github.event.inputs.orgId || 'manual' }}."
+          commit-message: "Add ${{ env.ACADEMY_NAME }} release v${{ github.event.inputs.version || 'latest' }}: ${{ env.NOTES }} [CI]"
+          title: "${{ env.ACADEMY_NAME }} v${{ github.event.inputs.version || 'latest' }}: ${{ env.NOTES }}"
+          body: "Automated PR for ${{ env.ACADEMY_NAME }} release v${{ github.event.inputs.version || 'latest' }} from academy-build. OrgId: ${{ github.event.inputs.orgId || 'manual' }}."
           branch: academy-release-v${{ github.event.inputs.version || 'latest' }}
           labels: academy
 
       - name: Auto-merge PR in meshery-cloud repo
         if: github.event.inputs.version != ''
         run: |
-          PR_NUMBER=$(jq -r .pull_request_number <<< "${{ steps.cpr.outputs.pull-request-number }}")
-          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
-            PR_NUMBER=$(jq -r .pull_request_number <<< "${{ steps.cpr.outputs.pr }}" || true)
-          fi
-          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
-            PR_NUMBER="${{ steps.cpr.outputs.pull-request-number }}"
-          fi
-          if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+          PR_NUMBER="${{ steps.cpr.outputs.pull-request-number }}"
+          if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ] && [ "$PR_NUMBER" != "" ]; then
+            echo "Auto-merging PR #$PR_NUMBER"
             gh pr merge "$PR_NUMBER" --merge --repo layer5io/meshery-cloud --admin --delete-branch
           else
-            echo "No PR created to auto-merge."
+            echo "No PR number found, skipping auto-merge."
           fi
         env:
           GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
