@@ -12,6 +12,6 @@ require (
 	github.com/layer5io/academy-theme v0.3.5 // indirect
 	github.com/layer5io/digitalocean-academy v0.1.9 // indirect
 	github.com/layer5io/exoscale-academy v0.6.17 // indirect
-	github.com/layer5io/layer5-academy v0.6.4 // indirect
+	github.com/layer5io/layer5-academy v0.7.0 // indirect
 	github.com/twbs/bootstrap v5.3.7+incompatible // indirect
 )
