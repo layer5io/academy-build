@@ -15,6 +15,10 @@
     "3e2f9c82-1a4c-4781-adf9-99ec22cd994e": {
       "module": "github.com/layer5io/digitalocean-academy",
       "version": "v0.1.9"
+    },
+    "c5ada327-8a58-4c8a-b9fa-51b95696488c": {
+      "module": "github.com/meshery-extensions/meshery-academy",
+      "version": ""
     }
   }
 }
