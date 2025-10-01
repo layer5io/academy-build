@@ -80,5 +80,7 @@ github.com/layer5io/layer5-academy v0.7.1 h1:pTZx9lTXYQ9SXJnXFp/yO8HaFij/V0YMLON
 github.com/layer5io/layer5-academy v0.7.1/go.mod h1:e1PFs9kVqafFFCAKAgRHtOvj9bq8MoGXF2uL+sv1viA=
 github.com/layer5io/layer5-academy v0.7.2 h1:+Z7hCbQu/GoDj9w630K1r9QtxQCCBYz+SpUoiIblVKY=
 github.com/layer5io/layer5-academy v0.7.2/go.mod h1:e1PFs9kVqafFFCAKAgRHtOvj9bq8MoGXF2uL+sv1viA=
+github.com/meshery-extensions/meshery-academy v0.0.5 h1:TXMICIlbA2g07yMqCNeL8UqAG6rzVyAGrwoRNoriuu4=
+github.com/meshery-extensions/meshery-academy v0.0.5/go.mod h1:/wIKj/8hYbf5GstZUO4NHcD+QlnDpIR2YxROUp6vQds=
 github.com/twbs/bootstrap v5.3.7+incompatible h1:ea1W8TOWZFkqSK2M0McpgzLiUQVru3bz8aHb0j/XtuM=
 github.com/twbs/bootstrap v5.3.7+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
