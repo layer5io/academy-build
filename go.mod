@@ -13,6 +13,6 @@ require (
 	github.com/layer5io/digitalocean-academy v0.1.9 // indirect
 	github.com/layer5io/exoscale-academy v0.6.17 // indirect
 	github.com/layer5io/layer5-academy v0.7.2 // indirect
-	github.com/meshery-extensions/meshery-academy v0.0.5 // indirect
+	github.com/meshery-extensions/meshery-academy v0.1.0 // indirect
 	github.com/twbs/bootstrap v5.3.7+incompatible // indirect
 )
