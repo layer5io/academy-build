@@ -98,5 +98,7 @@ github.com/meshery-extensions/meshery-academy v0.1.1 h1:RkoAW75r035LZeP4dls231wY
 github.com/meshery-extensions/meshery-academy v0.1.1/go.mod h1:/wIKj/8hYbf5GstZUO4NHcD+QlnDpIR2YxROUp6vQds=
 github.com/meshery-extensions/meshery-academy v0.1.3 h1:u6a02b/kkitVnzyCFnYGWAYah2ZPiTCOcEtazA7Sy58=
 github.com/meshery-extensions/meshery-academy v0.1.3/go.mod h1:/wIKj/8hYbf5GstZUO4NHcD+QlnDpIR2YxROUp6vQds=
+github.com/meshery-extensions/meshery-academy v0.2.0 h1:8Qzc9KJXoKereF/ZWxC0qsDT1qy8fLFku+LbJvnrj9o=
+github.com/meshery-extensions/meshery-academy v0.2.0/go.mod h1:/wIKj/8hYbf5GstZUO4NHcD+QlnDpIR2YxROUp6vQds=
 github.com/twbs/bootstrap v5.3.7+incompatible h1:ea1W8TOWZFkqSK2M0McpgzLiUQVru3bz8aHb0j/XtuM=
 github.com/twbs/bootstrap v5.3.7+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
