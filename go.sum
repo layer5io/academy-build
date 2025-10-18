@@ -108,6 +108,8 @@ github.com/layer5io/layer5-academy v0.8.3 h1:GSp4hsn8RHc658n6t50K07OpP0vUpiFdyFP
 github.com/layer5io/layer5-academy v0.8.3/go.mod h1:miYpg53+67PKiWbBb+T06PHNk6m+kzXMUntMmiMJStg=
 github.com/layer5io/layer5-academy v0.8.4 h1:LpM8O1NrgRHB5DeDjlR8S8086su30NAw+UWVPN0VFwA=
 github.com/layer5io/layer5-academy v0.8.4/go.mod h1:n0Jgeprz6f8c9yRP9mAtcNNRfTaNPcV21759Ur5j/Bo=
+github.com/layer5io/layer5-academy v0.8.5 h1:Dxtk4UjyI1e2h+mpGYbra/NFOY54UDwpO53xxRL76iE=
+github.com/layer5io/layer5-academy v0.8.5/go.mod h1:miYpg53+67PKiWbBb+T06PHNk6m+kzXMUntMmiMJStg=
 github.com/meshery-extensions/meshery-academy v0.0.5 h1:TXMICIlbA2g07yMqCNeL8UqAG6rzVyAGrwoRNoriuu4=
 github.com/meshery-extensions/meshery-academy v0.0.5/go.mod h1:/wIKj/8hYbf5GstZUO4NHcD+QlnDpIR2YxROUp6vQds=
 github.com/meshery-extensions/meshery-academy v0.1.0 h1:uy2TMhBu5fCzTno2OR08xqf9mLqfv71ygqpLm/dOSUE=
