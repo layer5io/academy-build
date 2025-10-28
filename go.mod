@@ -11,7 +11,7 @@ require (
 	github.com/FortAwesome/Font-Awesome v4.7.0+incompatible // indirect
 	github.com/layer5io/academy-theme v0.4.2 // indirect
 	github.com/layer5io/digitalocean-academy v0.1.12 // indirect
-	github.com/layer5io/exoscale-academy v0.6.24 // indirect
+	github.com/layer5io/exoscale-academy v0.6.25 // indirect
 	github.com/layer5io/layer5-academy v0.8.7 // indirect
 	github.com/meshery-extensions/meshery-academy v0.4.14 // indirect
 	github.com/twbs/bootstrap v5.3.8+incompatible // indirect
