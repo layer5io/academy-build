@@ -206,6 +206,8 @@ github.com/meshery-extensions/meshery-academy v0.4.14 h1:CsIvDg5nilEOrMuklQbN7bB
 github.com/meshery-extensions/meshery-academy v0.4.14/go.mod h1:0aiC/DF5KvRm9ppxD6oWlewELG2V+c8dcQHrsxD5D30=
 github.com/meshery-extensions/meshery-academy v0.4.15 h1:9u+/y2ZeZEduHnkSmOS0hpa0TN1PzzoysWkV+ehC4Ws=
 github.com/meshery-extensions/meshery-academy v0.4.15/go.mod h1:xzMgrAfAQuVQL4my5/zObFTLvQT4pbA2+VkjaTobM/s=
+github.com/meshery-extensions/meshery-academy v0.4.17 h1:Ok0mq1bIUZrzgQ7hYk7Y6LAKgUFCt9QlEA+HtM6XGYA=
+github.com/meshery-extensions/meshery-academy v0.4.17/go.mod h1:VHBUM/+z+a+lbvpEXwpuV5qF6zxzD+rKi6m6qZkJX4I=
 github.com/twbs/bootstrap v5.3.7+incompatible h1:ea1W8TOWZFkqSK2M0McpgzLiUQVru3bz8aHb0j/XtuM=
 github.com/twbs/bootstrap v5.3.7+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
