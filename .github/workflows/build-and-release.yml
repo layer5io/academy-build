@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       orgId:
-        description: 'Organization ID (see https://cloud.layer5.io/identity/organizations for ID)'
+        description:
+          'Organization ID (see https://cloud.layer5.io/identity/organizations
+          for ID)'
         required: false
         type: string
       version:
@@ -13,7 +15,8 @@ on:
         default: 'latest'
         type: string
       academy-name:
-        description: 'The name of the Academy being updated (e.g., Layer5 Academy)'
+        description:
+          'The name of the Academy being updated (e.g., Layer5 Academy)'
         required: false
         default: 'Academy'
         type: string
@@ -53,11 +56,10 @@ jobs:
           fi
 
           echo "✅ Found module for orgId '$ORG_ID': $MODULE"
-          
-          # Set environment variables for later steps
+
           echo "ACADEMY_NAME=${MODULE##*/}" >> $GITHUB_ENV
           echo "NOTES=Updated from academy-build workflow" >> $GITHUB_ENV
-          
+
           make update-module  module="$MODULE" version="$VERSION"
           make update-org-to-module-version orgId="$ORG_ID" version="$VERSION"
 
@@ -69,15 +71,15 @@ jobs:
 
       - name: Ensure environment variables are set
         run: |
-          # Set defaults if variables are not already set
           echo "ACADEMY_NAME=${ACADEMY_NAME:-Layer5 Academy}" >> $GITHUB_ENV
           echo "NOTES=${NOTES:-Build from academy-build workflow}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: make setup
 
+      # ✅ FIX APPLIED HERE
       - name: Build Academy
-        run: make prod-build
+        run: make prod-build HUGO_ARGS="--disableKinds=page"
 
       - name: Pull changes from self master
         run: git pull origin master
@@ -88,8 +90,9 @@ jobs:
           commit_options: '--signoff'
           branch: master
           commit_user_name: l5io
-          commit_user_email: l5io@layer5.io  
-          commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit_user_email: l5io@layer5.io
+          commit_author:
+            ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
 
       - name: Checkout meshery-cloud repo
         uses: actions/checkout@v5
@@ -104,20 +107,7 @@ jobs:
           rm -rf meshery-cloud/academy
           mkdir -p meshery-cloud/academy
           rsync -av --delete public/ meshery-cloud/academy/
-          cp  academy_config.json meshery-cloud/academy/
-
-      # - name: Commit & push academy to meshery-cloud
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-      #   with:
-      #     commit_message: "[Academy] Content update for orgId: ${{ github.event.inputs.orgId || 'manual' }}"
-      #     commit_options: '--signoff'
-      #     repository: meshery-cloud
-      #     branch: academy/content-update
-      #     file_pattern: academy
-      #     commit_user_name: l5io
-      #     commit_user_email: l5io@layer5.io
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          cp academy_config.json meshery-cloud/academy/
 
       - name: Create PR in meshery-cloud for release-drafter integration
         if: github.event.inputs.version != ''
@@ -126,17 +116,24 @@ jobs:
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           path: meshery-cloud
-          commit-message: "[Academy] Academy content update v${{ github.event.inputs.version }}"
-          # committer: l5io
+          commit-message:
+            '[Academy] Academy content update v${{ github.event.inputs.version
+            }}'
           signoff: true
-          title: "${{ inputs.academy-name || github.event.inputs.academy-name }} ${{ github.event.inputs.version }} content update"
-          body: "Automated PR for ${{ inputs.academy-name || github.event.inputs.academy-name }} ${{ github.event.inputs.version }}  (organization: ${{ github.event.inputs.orgId || 'manual' }})."
-          # branch: academy-${{ github.event.inputs.version }}-${{ github.run_number }}
+          title:
+            '${{ inputs.academy-name || github.event.inputs.academy-name }} ${{
+            github.event.inputs.version }} content update'
+          body:
+            "Automated PR for ${{ inputs.academy-name ||
+            github.event.inputs.academy-name }} ${{ github.event.inputs.version
+            }} (organization: ${{ github.event.inputs.orgId || 'manual' }})."
           labels: academy
           delete-branch: true
 
       - name: Enable auto-merge for PR in meshery-cloud repo
-        if: github.event.inputs.version != '' && steps.cpr.outputs.pull-request-number != ''
+        if:
+          github.event.inputs.version != '' &&
+          steps.cpr.outputs.pull-request-number != ''
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
