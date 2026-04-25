@@ -197,6 +197,10 @@ module:
           target: static
           disableWatch: false
 
+        - source: data
+          target: data
+          disableWatch: false
+
 
     - path: github.com/layer5io/layer5-academy
       disable: false
