@@ -75,6 +75,9 @@ params:
   # use "production" when building academy to for production experience 
   # use "development" when building the site for local authoring experience.
   build: "production"
+  
+  academy:
+    validationMode: error
 
   taxonomy:
     # set taxonomyCloud = [] to hide taxonomy clouds
@@ -192,6 +195,10 @@ module:
 
         - source: static
           target: static
+          disableWatch: false
+
+        - source: data
+          target: data
           disableWatch: false
 
 
