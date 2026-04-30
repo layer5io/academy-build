@@ -241,6 +241,9 @@ module:
         - source: static/1e2a8e46-937c-47ea-ab43-5716e3bcab2e
           target: static/1e2a8e46-937c-47ea-ab43-5716e3bcab2e
           disableWatch: false
+        - source: data/1e2a8e46-937c-47ea-ab43-5716e3bcab2e
+          target: data/1e2a8e46-937c-47ea-ab43-5716e3bcab2e
+          disableWatch: false
 
   
     - path: github.com/meshery-extensions/meshery-academy
