@@ -174,6 +174,8 @@ github.com/layer5io/layer5-academy v0.8.13 h1:JtVf3qwqwNvqeR/HpYhIODlS71KdPIvxb7
 github.com/layer5io/layer5-academy v0.8.13/go.mod h1:t1/YNWk3+VuvJIuReJx4TSQ3B9ghKnpgn1SGhwTRxb8=
 github.com/layer5io/layer5-academy v0.8.16 h1:AHCw15sJiMPTs9qMQJFRtRiAJI+jPeXNx6axTuCNF2U=
 github.com/layer5io/layer5-academy v0.8.16/go.mod h1:BEhuWARp57AwJ+LbtaOnfQxlHhitPXSL96lcjxlX3OI=
+github.com/layer5io/layer5-academy v0.8.17 h1:iID5c+brDAZ+gN4CNbNHo2nxOO+LX5Y3QlCx11y2DpI=
+github.com/layer5io/layer5-academy v0.8.17/go.mod h1:+4giXvfJ9sRCN8+1+s7GENTIXLSH/pPAqFWk/u5+3w4=
 github.com/meshery-extensions/meshery-academy v0.0.5 h1:TXMICIlbA2g07yMqCNeL8UqAG6rzVyAGrwoRNoriuu4=
 github.com/meshery-extensions/meshery-academy v0.0.5/go.mod h1:/wIKj/8hYbf5GstZUO4NHcD+QlnDpIR2YxROUp6vQds=
 github.com/meshery-extensions/meshery-academy v0.1.0 h1:uy2TMhBu5fCzTno2OR08xqf9mLqfv71ygqpLm/dOSUE=
@@ -236,6 +238,8 @@ github.com/meshery-extensions/meshery-academy v0.4.20 h1:4EoyCVGHgVa2sDxhVfzivYe
 github.com/meshery-extensions/meshery-academy v0.4.20/go.mod h1:VHBUM/+z+a+lbvpEXwpuV5qF6zxzD+rKi6m6qZkJX4I=
 github.com/meshery-extensions/meshery-academy v0.4.22 h1:CWwzYR4PJPTO/jihq/SkeRmz2iZ5Q2izK6nuWetEoAc=
 github.com/meshery-extensions/meshery-academy v0.4.22/go.mod h1:prddv4kTO73Bi9F02MmptA7THpXwDzFvkOO0tLd8Xfo=
+github.com/meshery-extensions/meshery-academy v0.4.23 h1:atIdWz0kJ/gIlzqEMzckwEkLQAGA/dq+dLyCnH64gHA=
+github.com/meshery-extensions/meshery-academy v0.4.23/go.mod h1:Ogr9fsqVytzFloY/OXqs0om5WLxth5KSsJdc3XOD/Bg=
 github.com/twbs/bootstrap v5.3.7+incompatible h1:ea1W8TOWZFkqSK2M0McpgzLiUQVru3bz8aHb0j/XtuM=
 github.com/twbs/bootstrap v5.3.7+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
