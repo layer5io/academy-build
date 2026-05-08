@@ -12,7 +12,7 @@ require (
 	github.com/layer5io/academy-theme v0.4.10 // indirect
 	github.com/layer5io/digitalocean-academy v0.1.14 // indirect
 	github.com/layer5io/exoscale-academy v0.6.33 // indirect
-	github.com/layer5io/layer5-academy v0.8.16 // indirect
-	github.com/meshery-extensions/meshery-academy v0.4.22 // indirect
+	github.com/layer5io/layer5-academy v0.8.17 // indirect
+	github.com/meshery-extensions/meshery-academy v0.4.23 // indirect
 	github.com/twbs/bootstrap v5.3.8+incompatible // indirect
 )
