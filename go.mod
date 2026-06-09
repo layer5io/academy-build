@@ -1,6 +1,6 @@
 module github.com/layer5io/academy
 
-go 1.25.5
+go 1.26.4
 
 // Manually configured to use a specific commit of Font Awesome , changing the version breaks the build
 replace github.com/FortAwesome/Font-Awesome v4.7.0+incompatible => github.com/FortAwesome/Font-Awesome v0.0.0-20241216213156-af620534bfc3
@@ -13,6 +13,6 @@ require (
 	github.com/layer5io/digitalocean-academy v0.1.20 // indirect
 	github.com/layer5io/exoscale-academy v0.6.38 // indirect
 	github.com/layer5io/layer5-academy v0.8.22 // indirect
-	github.com/meshery-extensions/meshery-academy v0.4.28 // indirect
+	github.com/meshery-extensions/meshery-academy v0.4.29 // indirect
 	github.com/twbs/bootstrap v5.3.8+incompatible // indirect
 )
