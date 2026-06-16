@@ -290,20 +290,20 @@ module:
       disable: false
 
       mounts:
-        - source: content/learning-paths/<replace-with-tcs-orgID>
-          target: content/learning-paths/<replace-with-tcs-orgID>
+        - source: content/learning-paths/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
+          target: content/learning-paths/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
           disableWatch: false
-        - source: content/certifications/<replace-with-tcs-orgID>
-          target: content/certifications/<replace-with-tcs-orgID>
+        - source: content/certifications/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
+          target: content/certifications/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
           disableWatch: false
-        - source: content/challenges/<replace-with-tcs-orgID>
-          target: content/challenges/<replace-with-tcs-orgID>
+        - source: content/challenges/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
+          target: content/challenges/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
           disableWatch: false
-        - source: layouts/shortcodes/<replace-with-tcs-orgID>
-          target: layouts/shortcodes/<replace-with-tcs-orgID>
+        - source: layouts/shortcodes/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
+          target: layouts/shortcodes/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
           disableWatch: false
-        - source: static/<replace-with-tcs-orgID>
-          target: static/<replace-with-tcs-orgID>
+        - source: static/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
+          target: static/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
           disableWatch: false
 
     - path: github.com/aabidsofi19/aabids-academy
