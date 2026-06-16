@@ -285,7 +285,26 @@ module:
         - source: static/3e2f9c82-1a4c-4781-adf9-99ec22cd994e
           target: static/3e2f9c82-1a4c-4781-adf9-99ec22cd994e
           disableWatch: false
+    
+    - path: github.com/meshery-extensions/tcslabs-academy
+      disable: false
 
+      mounts:
+        - source: content/learning-paths/<replace-with-tcs-orgID>
+          target: content/learning-paths/<replace-with-tcs-orgID>
+          disableWatch: false
+        - source: content/certifications/<replace-with-tcs-orgID>
+          target: content/certifications/<replace-with-tcs-orgID>
+          disableWatch: false
+        - source: content/challenges/<replace-with-tcs-orgID>
+          target: content/challenges/<replace-with-tcs-orgID>
+          disableWatch: false
+        - source: layouts/shortcodes/<replace-with-tcs-orgID>
+          target: layouts/shortcodes/<replace-with-tcs-orgID>
+          disableWatch: false
+        - source: static/<replace-with-tcs-orgID>
+          target: static/<replace-with-tcs-orgID>
+          disableWatch: false
 
     - path: github.com/aabidsofi19/aabids-academy
       disable: true
@@ -300,3 +319,4 @@ module:
         - source: static/27e21312-1e0c-4b2b-a045-95fcde425f09
           target: static/27e21312-1e0c-4b2b-a045-95fcde425f09
           disableWatch: false
+

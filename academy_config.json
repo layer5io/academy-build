@@ -19,6 +19,10 @@
     "c5ada327-8a58-4c8a-b9fa-51b95696488c": {
       "module": "github.com/meshery-extensions/meshery-academy",
       "version": "v0.4.29"
+    },
+     "<replace-with-tcs-orgID>": {
+      "module": "github.com/meshery-extensions/tcslabs-academy",
+      "version": "v0.0.1"
     }
   }
 }
