@@ -1,6 +1,6 @@
 
 # 🏫 Update Academy Action
-
+![Hugo](https://img.shields.io/badge/Hugo-Framework-FF4088?logo=hugo&logoColor=white)
 **Trigger an academy content update for your organization using the Layer5 Cloud API.**
 
 This action is useful when you want to build and deploy an academy site (powered by Hugo) and then notify the Layer5 platform to pull the latest content for your organization.
