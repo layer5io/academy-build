@@ -2,8 +2,15 @@
   <img src=".github/welcome/Layer5-celebration.png" alt="Layer5 Celebration">
 </p>
 
-
-##🏫 Update Academy Action
+<p style="clear:both;">
+  <img src=".github/readme/images/academy.svg"
+       width="50"
+       alt="Academy"
+       align="left"
+       style="margin-right:15px;" />
+  
+## Update Academy Action
+</p>
 
 **Trigger an academy content update for your organization using the Layer5 Cloud API.**
 
@@ -85,10 +92,8 @@ Always store the `token` input as a GitHub secret and **never hardcode it** in y
 
 ---
 
----
-
 <p style="clear:both;">
-  <img src=".github/readme/images/community.svg"
+  <img src=".github/readme/images/layer5-community-sign.png"
        width="50"
        alt="Layer5 Community"
        align="left"
@@ -133,6 +138,7 @@ Contributors are expected to follow the [CNCF Code of Conduct](https://github.co
 
 <br clear="both" />
 
+---
 
 ## 🧑‍💻 Maintained by [Layer5](https://layer5.io)
 
