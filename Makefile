@@ -102,4 +102,4 @@ sync-with-cloud:
 	cp academy_config.json ../meshery-cloud/academy/
 	@echo "Academy site synced with Layer5 Cloud." 
 
-.PHONY: setup build stg-build prod-build theme-update sync-with-cloud site check-go update-module update-org-to-module-version
+.PHONY: setup build build-preview clean build-clean stg-build prod-build theme-update sync-with-cloud site check-go update-module update-org-to-module-version
