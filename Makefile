@@ -22,7 +22,7 @@ include .github/build/Makefile-show-help.mk
 ----LOCAL_BUILDS: Show help for available targets
 	
 ## Local: Install site dependencies
-setup:
+setup: check-deps
 	npm install
 
 ## Local: Build and run site locally with draft and future content enabled.
@@ -67,6 +67,23 @@ check-go:
 	@command -v go > /dev/null || (echo "Go is not installed. Please install it before proceeding."; exit 1)
 	@echo "Go is installed."
 
+## Check for required dependencies (Node.js and npm) and versions
+check-deps:
+	@echo "Checking for required dependencies..."
+	@command -v node > /dev/null || (echo "Node.js is not installed. Please install Node.js v14+ before proceeding."; exit 1)
+	@NODE_VERSION=$$(node -v | cut -d'v' -f2 | cut -d'.' -f1); \
+	if [ "$$NODE_VERSION" -lt 14 ]; then \
+		echo "Node.js v14+ is required. Current version: $$(node -v)"; \
+		exit 1; \
+	fi
+	@command -v npm > /dev/null || (echo "npm is not installed. Please install npm before proceeding."; exit 1)
+	@NPM_VERSION=$$(npm -v | cut -d'.' -f1); \
+	if [ "$$NPM_VERSION" -lt 6 ]; then \
+		echo "npm v6+ is required. Current version: $$(npm -v)"; \
+		exit 1; \
+	fi
+	@echo "All dependencies verified: Node.js $$(node -v), npm $$(npm -v)"
+
 ## Update the academy-theme package to latest version
 theme-update:
 	echo "Updating to latest academy-theme..." && \
@@ -102,4 +119,4 @@ sync-with-cloud:
 	cp academy_config.json ../meshery-cloud/academy/
 	@echo "Academy site synced with Layer5 Cloud." 
 
-.PHONY: setup build build-preview clean build-clean stg-build prod-build theme-update sync-with-cloud site check-go update-module update-org-to-module-version
+.PHONY: setup build build-preview clean build-clean stg-build prod-build theme-update sync-with-cloud site check-go check-deps update-module update-org-to-module-version

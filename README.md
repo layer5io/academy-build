@@ -27,6 +27,9 @@ You can integrate this into your workflows after building your site or on versio
 The repository includes a `Makefile` for local site development and deployment tasks:
 
 ```bash
+# Verify Node.js and npm versions
+make check-deps
+
 # Install site dependencies
 make setup
 
