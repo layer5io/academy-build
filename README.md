@@ -1,9 +1,9 @@
 <p align="center">
-  <img src=".github/welcome/Layer5-celebration.png" alt="Layer5 Celebration">
+  <img src=".github/readme/images/layer5-light-no-trim.svg"  width="45%" alt="Layer5 Logo">
 </p>
 
 
-<img src=".github/readme/images/academy.svg"
+<img src=".github/readme/images/academy-layer5-light.png"
        width="50"
        alt="Academy"
        align="left"
