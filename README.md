@@ -22,6 +22,44 @@ You can integrate this into your workflows after building your site or on versio
 
 ---
 
+## 🇲 Makefile Targets
+
+The repository includes a `Makefile` for local site development and deployment tasks:
+
+```bash
+# Install site dependencies
+make setup
+
+# Start the local Hugo development server with drafts and future content
+make site
+
+# Build the site locally
+make build
+
+# Build the site and clean the destination directory
+make build-clean
+
+# Clean the Hugo destination directory and restart local setup
+make clean
+
+# Verify Go is installed before starting the local site
+make check-go
+
+# Update the academy-theme package to the latest version
+make theme-update
+
+# Build site for staging with the Layer5 Cloud staging URL
+make stg-build
+
+# Build site for production with the Layer5 Cloud production URL
+make prod-build
+
+# Sync the built site from public/ to ../meshery-cloud/academy
+make sync-with-cloud
+```
+
+---
+
 ## 📥 Inputs
 
 | Name      | Required | Description                                                                    |
