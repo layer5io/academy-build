@@ -18,37 +18,45 @@ include .github/build/Makefile-show-help.mk
 #----------------------------------------------------------------------------
 # Academy
 # ---------------------------------------------------------------------------
-.PHONY: setup build stg-build prod-build theme-update sync-with-cloud site check-go update-module update-org-to-module-version
-
 ## ------------------------------------------------------------
 ----LOCAL_BUILDS: Show help for available targets
 	
 ## Local: Install site dependencies
-setup:
-	 npm i
+setup: check-deps
+	npm install
+
+## Local: Build and run site locally with draft and future content enabled.
+site: check-go
+	hugo server -D -F
 
 ## Local: Build site for local consumption
 build:
 	hugo build
 
+## Build site for local consumption
+build-preview:
+	hugo --baseURL=$(BASEURL)
+
+## Empty build cache and run on your local machine.
+clean:
+	hugo --cleanDestinationDir
+	make setup
+	make site
+
 ## Local: Build site for local consumption remove files from destination not found in static directories
 build-clean:
 	hugo build --cleanDestinationDir
-
-## Local: Build and run site locally with draft and future content enabled.
-site: check-go
-	hugo server -D -F
 
 ## ------------------------------------------------------------
 ----REMOTE_BUILDS: Show help for available targets
 
 ## Build site using Layer5 Cloud Staging as the baseURL
 stg-build:
-	 hugo --cleanDestinationDir --gc --minify --baseURL "https://staging-cloud.layer5.io/academy"
+	hugo --cleanDestinationDir --gc --minify --baseURL "https://staging-cloud.layer5.io/academy"
 
 ## Build site using Layer5 Cloud as the baseURL
 prod-build:
-	 hugo  --cleanDestinationDir --gc --minify --baseURL "https://cloud.layer5.io/academy"
+	hugo  --cleanDestinationDir --gc --minify --baseURL "https://cloud.layer5.io/academy"
 
 
 ## ------------------------------------------------------------
@@ -58,6 +66,23 @@ check-go:
 	@echo "Checking if Go is installed..."
 	@command -v go > /dev/null || (echo "Go is not installed. Please install it before proceeding."; exit 1)
 	@echo "Go is installed."
+
+## Check for required dependencies (Node.js and npm) and versions
+check-deps:
+	@echo "Checking for required dependencies..."
+	@command -v node > /dev/null || (echo "Node.js is not installed. Please install Node.js v14+ before proceeding."; exit 1)
+	@NODE_VERSION=$$(node -v | cut -d'v' -f2 | cut -d'.' -f1); \
+	if [ "$$NODE_VERSION" -lt 14 ]; then \
+		echo "Node.js v14+ is required. Current version: $$(node -v)"; \
+		exit 1; \
+	fi
+	@command -v npm > /dev/null || (echo "npm is not installed. Please install npm before proceeding."; exit 1)
+	@NPM_VERSION=$$(npm -v | cut -d'.' -f1); \
+	if [ "$$NPM_VERSION" -lt 6 ]; then \
+		echo "npm v6+ is required. Current version: $$(npm -v)"; \
+		exit 1; \
+	fi
+	@echo "All dependencies verified: Node.js $$(node -v), npm $$(npm -v)"
 
 ## Update the academy-theme package to latest version
 theme-update:
@@ -93,3 +118,5 @@ sync-with-cloud:
 	rsync -av --delete public/ ../meshery-cloud/academy/ 
 	cp academy_config.json ../meshery-cloud/academy/
 	@echo "Academy site synced with Layer5 Cloud." 
+
+.PHONY: setup build build-preview clean build-clean stg-build prod-build theme-update sync-with-cloud site check-go check-deps update-module update-org-to-module-version
