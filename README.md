@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://layer5.io/images/layer5-logo.svg" width="200" />
+</p>
+
+<br />
 
 # 🏫 Update Academy Action
 ![Hugo](https://img.shields.io/badge/Hugo-Framework-FF4088?logo=hugo&logoColor=white)
