@@ -287,7 +287,7 @@ module:
           disableWatch: false
     
     - path: github.com/meshery-extensions/tcslabs-academy
-      disable: false
+      disable: true
 
       mounts:
         - source: content/learning-paths/deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
