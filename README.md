@@ -2,12 +2,18 @@
   <img src=".github/readme/images/layer5-light-no-trim.svg"  width="45%" alt="Layer5 Logo">
 </p>
 
+<p align="center">
+  <a href="https://layer5.io/learn/academy"><img src="https://img.shields.io/badge/Layer5-Academy-00B39F?style=for-the-badge" alt="Layer5 Academy"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/layer5io/academy-build?style=for-the-badge" alt="Apache 2.0 License"></a>
+  <a href="https://gohugo.io/"><img src="https://img.shields.io/badge/Hugo-Framework-FF4088?logo=hugo&logoColor=white&style=for-the-badge" alt="Hugo"></a>
+</p>
 
 <img src=".github/readme/images/academy-layer5-light.png"
        width="50"
        alt="Academy"
        align="left"
        style="margin-right:15px;" />
+
   
 ## Update Academy Action
 
