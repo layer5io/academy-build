@@ -6,7 +6,7 @@
     },
     "1e2a8e46-937c-47ea-ab43-5716e3bcab2e": {
       "module": "github.com/layer5io/exoscale-academy",
-      "version": "v0.6.38"
+      "version": "v0.6.39"
     },
     "d011fd20-a3f5-4480-883b-dfb34321d168": {
       "module": "github.com/layer5io/layer5-academy",
@@ -19,6 +19,10 @@
     "c5ada327-8a58-4c8a-b9fa-51b95696488c": {
       "module": "github.com/meshery-extensions/meshery-academy",
       "version": "v0.4.29"
+    },
+    "deea6061-b6be-49a9-ad1c-f1a5c32e1fa9": {
+      "module": "github.com/meshery-extensions/tcslabs-academy",
+      "version": "v0.0.1"
     }
   }
 }

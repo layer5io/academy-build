@@ -1,5 +1,22 @@
+<p align="center">
+  <img src=".github/readme/images/layer5-light-no-trim.svg"  width="45%" alt="Layer5 Logo">
+</p>
 
-# 🏫 Update Academy Action
+<p align="center">
+  <a href="https://layer5.io/learn/academy"><img src="https://img.shields.io/badge/Layer5-Academy-00B39F?style=for-the-badge" alt="Layer5 Academy"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/layer5io/academy-build?style=for-the-badge" alt="Apache 2.0 License"></a>
+  <a href="https://gohugo.io/"><img src="https://img.shields.io/badge/Hugo-Framework-FF4088?logo=hugo&logoColor=white&style=for-the-badge" alt="Hugo"></a>
+</p>
+
+<img src=".github/readme/images/academy-layer5-light.png"
+       width="50"
+       alt="Academy"
+       align="left"
+       style="margin-right:15px;" />
+
+  
+## Update Academy Action
+
 
 **Trigger an academy content update for your organization using the Layer5 Cloud API.**
 
@@ -19,6 +36,47 @@ This action is useful when you want to build and deploy an academy site (powered
 ```
 
 You can integrate this into your workflows after building your site or on versioned releases.
+
+---
+
+## 🛠️  Makefile Targets
+
+The repository includes a `Makefile` for local site development and deployment tasks:
+
+```bash
+# Verify Node.js and npm versions
+make check-deps
+
+# Install site dependencies
+make setup
+
+# Start the local Hugo development server with drafts and future content
+make site
+
+# Build the site locally
+make build
+
+# Build the site and clean the destination directory
+make build-clean
+
+# Clean the Hugo destination directory and restart local setup
+make clean
+
+# Verify Go is installed before starting the local site
+make check-go
+
+# Update the academy-theme package to the latest version
+make theme-update
+
+# Build site for staging with the Layer5 Cloud staging URL
+make stg-build
+
+# Build site for production with the Layer5 Cloud production URL
+make prod-build
+
+# Sync the built site from public/ to ../meshery-cloud/academy
+make sync-with-cloud
+```
 
 ---
 
@@ -78,6 +136,53 @@ jobs:
 ## 🔐 Security
 
 Always store the `token` input as a GitHub secret and **never hardcode it** in your workflow YAML.
+
+---
+
+<div style="clear:both;"></div>
+  <img src=".github/readme/images/layer5-community-sign.png"
+       width="50"
+       alt="Layer5 Community"
+       align="left"
+       style="margin-right:15px;" />
+
+## Community & Contributions
+
+We warmly welcome all contributors! As you get started, please review this project's [contributing guidelines](CONTRIBUTING.md).
+
+
+Contributors are expected to follow the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
+
+<p>
+<a href="https://slack.layer5.io">
+
+<picture align="right">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/readme/images/slack-dark-128.png">
+  <source media="(prefers-color-scheme: light)" srcset=".github/readme/images/slack-128.png">
+  <img src=".github/readme/images/slack-128.png"
+       width="120"
+       align="right"
+       alt="Join Layer5 Slack">
+</picture>
+
+</a>
+
+<a href="https://layer5.io/community">
+  <img src=".github/readme/images/community.svg"
+       width="140"
+       align="left"
+       style="margin-right:10px;"
+       alt="Layer5 Community">
+</a>
+
+✔️ <em><strong>Join</strong></em> the <a href="https://slack.layer5.io">Layer5 Slack Community</a>.<br />
+✔️ <em><strong>Discuss</strong></em> in the <a href="https://discuss.layer5.io">Community Forum</a>.<br />
+✔️ <em><strong>Explore</strong></em> the <a href="https://layer5.io/community/handbook">Community Handbook</a>.<br />
+✔️ <em><strong>Start</strong></em> with the <a href="https://layer5.io/community/newcomers">Newcomer's Guide</a>.<br />
+
+</p>
+
+<br clear="both" />
 
 ---
 
