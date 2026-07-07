@@ -15,83 +15,33 @@
 include .github/build/Makefile.core.mk
 include .github/build/Makefile-show-help.mk
 
-#----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Academy
 # ---------------------------------------------------------------------------
-## ------------------------------------------------------------
-----LOCAL_BUILDS: Show help for available targets
-	
-## Local: Install site dependencies
-setup: check-deps
-	npm install
-
-## Local: Build and run site locally with draft and future content enabled.
-site: check-go
-	hugo server -D -F
-
-## Local: Build site for local consumption
-build:
-	hugo build
-
-## Build site for local consumption
-build-preview:
-	hugo --baseURL=$(BASEURL)
-
-## Empty build cache and run on your local machine.
-clean:
-	hugo --cleanDestinationDir
-	make setup
-	make site
-
-## Local: Build site for local consumption remove files from destination not found in static directories
-build-clean:
-	hugo build --cleanDestinationDir
-
-## ------------------------------------------------------------
-----REMOTE_BUILDS: Show help for available targets
-
-## Build site using Layer5 Cloud Staging as the baseURL
-stg-build:
-	hugo --cleanDestinationDir --gc --minify --baseURL "https://staging-cloud.layer5.io/academy"
-
-## Build site using Layer5 Cloud as the baseURL
-prod-build:
-	hugo  --cleanDestinationDir --gc --minify --baseURL "https://cloud.layer5.io/academy"
-
 
 ## ------------------------------------------------------------
 ----MAINTENANCE: Show help for available targets
 
+## Verify required commands and local dependencies are present.
+check-deps:
+	@echo "Checking if 'npm' and local 'hugo' binary are present..."
+	@command -v npm > /dev/null || { echo "Error: 'npm' not found. Please install Node.js and npm."; exit 1; }
+	@test -x node_modules/.bin/hugo || { echo "Error: Hugo binary not found in node_modules. Please run 'make setup' first."; exit 1; }
+	@echo "Dependencies check passed."
+
+## Validate Go is installed
 check-go:
 	@echo "Checking if Go is installed..."
-	@command -v go > /dev/null || (echo "Go is not installed. Please install it before proceeding."; exit 1)
+	@command -v go > /dev/null || { echo "Go is not installed. Please install it before proceeding."; exit 1; }
 	@echo "Go is installed."
 
-## Check for required dependencies (Node.js and npm) and versions
-check-deps:
-	@echo "Checking for required dependencies..."
-	@command -v node > /dev/null || (echo "Node.js is not installed. Please install Node.js v14+ before proceeding."; exit 1)
-	@NODE_VERSION=$$(node -v | cut -d'v' -f2 | cut -d'.' -f1); \
-	if [ "$$NODE_VERSION" -lt 14 ]; then \
-		echo "Node.js v14+ is required. Current version: $$(node -v)"; \
-		exit 1; \
-	fi
-	@command -v npm > /dev/null || (echo "npm is not installed. Please install npm before proceeding."; exit 1)
-	@NPM_VERSION=$$(npm -v | cut -d'.' -f1); \
-	if [ "$$NPM_VERSION" -lt 6 ]; then \
-		echo "npm v6+ is required. Current version: $$(npm -v)"; \
-		exit 1; \
-	fi
-	@echo "All dependencies verified: Node.js $$(node -v), npm $$(npm -v)"
-
 ## Update the academy-theme package to latest version
-theme-update:
-	echo "Updating to latest academy-theme..." && \
-	hugo mod get github.com/layer5io/academy-theme
-
+theme-update: check-go check-deps
+	@echo "Updating to latest academy-theme..."
+	npm run update:theme
 
 ## Update a specific Hugo module to a specific version.
-update-module:
+update-module: check-go check-deps
 	@if [ -z "$(module)" ] || [ -z "$(version)" ]; then \
 		echo "Usage: make update-module module=<module-path> version=<version>"; \
 		exit 1; \
@@ -108,6 +58,51 @@ update-org-to-module-version:
 	'.orgToModuleMapping[$$orgId].version = $$version' \
 	academy_config.json > tmp.json && mv tmp.json academy_config.json
 
+## ------------------------------------------------------------
+----LOCAL_BUILDS: Show help for available targets
+
+## Install site dependencies
+setup:
+	npm install
+
+## Build site for local consumption
+build: check-go check-deps
+	npm run build:production
+
+## Build site for local consumption
+build-preview: check-go check-deps
+	npm run build:preview
+
+## Build and run site locally with draft and future content enabled.
+site: check-go check-deps
+	npm run site
+
+## Build and run site locally
+serve: check-go check-deps
+	npm run serve
+
+## Empty build cache and run on your local machine.
+clean:
+	npm run clean
+
+## Format code using Prettier
+format:
+	npm run format
+
+## Fix Markdown linting issues
+lint-fix:
+	npm run lint:fix
+
+## ------------------------------------------------------------
+----REMOTE_BUILDS: Show help for available targets
+
+## Build site using Layer5 Cloud Staging as the baseURL
+stg-build: check-go check-deps
+	npm run _hugo -- --gc --minify --baseURL "https://staging-cloud.layer5.io/academy"
+
+## Build site using Layer5 Cloud as the baseURL
+prod-build: check-go check-deps
+	npm run _hugo -- --gc --minify --baseURL "https://cloud.layer5.io/academy"
 
 ## Publish Academy build to Layer5 Cloud.
 ## Copy built site from public/ to 
@@ -119,4 +114,20 @@ sync-with-cloud:
 	cp academy_config.json ../meshery-cloud/academy/
 	@echo "Academy site synced with Layer5 Cloud." 
 
-.PHONY: setup build build-preview clean build-clean stg-build prod-build theme-update sync-with-cloud site check-go check-deps update-module update-org-to-module-version
+.PHONY: \
+	setup \
+	build \
+	build-preview \
+	serve \
+	site \
+	clean \
+	format \
+	lint-fix \
+	stg-build \
+	prod-build \
+	theme-update \
+	sync-with-cloud \
+	check-deps \
+	check-go \
+	update-module \
+	update-org-to-module-version
