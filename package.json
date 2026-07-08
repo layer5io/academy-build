@@ -35,7 +35,8 @@
     "update:pkg:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest",
     "update:pkg:hugo": "npm install --save-dev --save-exact hugo-extended@latest",
     "update:pkgs": "npx npm-check-updates -u",
-    "update:theme": "hugo mod get github.com/layer5io/academy-theme"
+    "update:theme": "hugo mod get github.com/layer5io/academy-theme",
+    "update:module": "hugo mod get"
 },
 "devDependencies": {
     "autoprefixer": "^10.4.27",
