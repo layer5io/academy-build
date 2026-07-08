@@ -1,60 +1,24 @@
 # Copyright Layer5, Inc.
 #
-# Licensed under the GNU Affero General Public License, Version 3.0
-# (the # "License"); you may not use this file except in compliance
-# with the License. You may obtain a copy of the License at
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    https://www.gnu.org/licenses/agpl-3.0.en.html
 #    http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-@@ -13,83 +13,145 @@
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
 # limitations under the License.
 
 include .github/build/Makefile.core.mk
 include .github/build/Makefile-show-help.mk
 
-#----------------------------------------------------------------------------
-# Academy
-# ---------------------------------------------------------------------------
-.PHONY: setup build stg-build prod-build theme-update sync-with-cloud site check-go update-module update-org-to-module-version
-
-## ------------------------------------------------------------
-----LOCAL_BUILDS: Show help for available targets
-	
-## Local: Install site dependencies
-setup:
-	 npm i
-
-## Local: Build site for local consumption
-build:
-	hugo build
-
-## Local: Build site for local consumption remove files from destination not found in static directories
-build-clean:
-	hugo build --cleanDestinationDir
-
-## Local: Build and run site locally with draft and future content enabled.
-site: check-go
-	hugo server -D -F
-
-## ------------------------------------------------------------
-----REMOTE_BUILDS: Show help for available targets
 # Changes to any STANDARD recipe below require a corresponding change in all other
 # repositories subscribed to the 'meshery-academy' topic. Recipes under the
 # "REPO-SPECIFIC" section exist only in this repo and must NOT be propagated.
 
-## Build site using Layer5 Cloud Staging as the baseURL
-stg-build:
-	 hugo --cleanDestinationDir --gc --minify --baseURL "https://staging-cloud.layer5.io/academy"
-
-## Build site using Layer5 Cloud as the baseURL
-prod-build:
-	 hugo  --cleanDestinationDir --gc --minify --baseURL "https://cloud.layer5.io/academy"
 # htmltest is fetched and run on demand via 'go run' (no install step). Pin it for
 # reproducible link checks; leave as 'latest' to always use the newest release.
 HTMLTEST_VERSION ?= latest
@@ -64,8 +28,6 @@ export HTMLTEST_VERSION
 # MAINTENANCE (standard)
 # ---------------------------------------------------------------------------
 
-## ------------------------------------------------------------
-----MAINTENANCE: Show help for available targets
 ## Verify required commands and local dependencies are present.
 check-deps:
 	@echo "Checking if 'npm' and local 'hugo' binary are present..."
@@ -75,15 +37,11 @@ check-deps:
 
 ## Validate Go is installed
 check-go:
-@echo "Checking if Go is installed..."
-	@command -v go > /dev/null || (echo "Go is not installed. Please install it before proceeding."; exit 1)
+	@echo "Checking if Go is installed..."
 	@command -v go > /dev/null || { echo "Go is not installed. Please install it before proceeding."; exit 1; }
-@echo "Go is installed."
+	@echo "Go is installed."
 
 ## Update the academy-theme package to latest version
-theme-update:
-	echo "Updating to latest academy-theme..." && \
-	hugo mod get github.com/layer5io/academy-theme
 theme-update: check-go check-deps
 	@echo "Updating to latest academy-theme..."
 	npm run update:theme
@@ -92,8 +50,6 @@ theme-update: check-go check-deps
 # LOCAL BUILDS (standard)
 # ---------------------------------------------------------------------------
 
-## Update a specific Hugo module to a specific version.
-update-module:
 ## Install site dependencies
 setup:
 	npm install
@@ -153,39 +109,32 @@ build-staging: check-go check-deps
 	npm run build:production -- --baseURL "https://staging-cloud.layer5.io/academy"
 
 ## [repo-specific] Update a specific Hugo module to a specific version.
-update-module: check-go
-@if [ -z "$(module)" ] || [ -z "$(version)" ]; then \
-echo "Usage: make update-module module=<module-path> version=<version>"; \
-exit 1; \
-fi && \
-echo "Updating Hugo module: $(module) to version $(version)" && \
-hugo mod get $(module)@$(version)
+update-module: check-go check-deps
+	@if [ -z "$(module)" ] || [ -z "$(version)" ]; then \
+		echo "Usage: make update-module module=<module-path> version=<version>"; \
+		exit 1; \
+	fi && \
+	echo "Updating Hugo module: $(module) to version $(version)" && \
+	npm run update:module -- $(module)@$(version)
 
 ## [repo-specific] Set an org's module version in academy_config.json.
 update-org-to-module-version:
-@if [ -z "$(orgId)" ] || [ -z "$(version)" ]; then \
-		echo "Usage: make update-org-to-module-mapping orgId=<org-id> version=<version>"; \
+	@if [ -z "$(orgId)" ] || [ -z "$(version)" ]; then \
 		echo "Usage: make update-org-to-module-version orgId=<org-id> version=<version>"; \
-exit 1; \
-fi && \
+		exit 1; \
+	fi && \
 	echo "Setting org $(orgId) to module version $(version)" && \
-jq --arg orgId "$(orgId)" --arg version "$(version)" \
-'.orgToModuleMapping[$$orgId].version = $$version' \
-academy_config.json > tmp.json && mv tmp.json academy_config.json
+	jq --arg orgId "$(orgId)" --arg version "$(version)" \
+	'.orgToModuleMapping[$$orgId].version = $$version' \
+	academy_config.json > tmp.json && mv tmp.json academy_config.json
 
-
-## Publish Academy build to Layer5 Cloud.
-## Copy built site from public/ to 
-## ../meshery-cloud/academy directory
 ## [repo-specific] Publish the built site to the Layer5 Cloud (../meshery-cloud/academy).
 sync-with-cloud:
 	@test -d ../meshery-cloud || { echo "Error: ../meshery-cloud sibling checkout not found."; exit 1; }
-rm -rf ../meshery-cloud/academy
-mkdir -p ../meshery-cloud/academy
-	rsync -av --delete public/ ../meshery-cloud/academy/ 
+	rm -rf ../meshery-cloud/academy
+	mkdir -p ../meshery-cloud/academy
 	rsync -av --delete public/ ../meshery-cloud/academy/
-cp academy_config.json ../meshery-cloud/academy/
-	@echo "Academy site synced with Layer5 Cloud." 
+	cp academy_config.json ../meshery-cloud/academy/
 	@echo "Academy site synced with Layer5 Cloud."
 
 .PHONY: \
