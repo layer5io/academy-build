@@ -9,7 +9,7 @@ draft: true
 The `svg` shortcode renders an inline SVG icon from `assets/icons/{name}.svg`.
 
 ```text
-{{</* svg name="layer5-academy-icon" */>}}
+{{</* svg name="exoscale-icon" */>}}
 ```
 
 **Parameters:**
