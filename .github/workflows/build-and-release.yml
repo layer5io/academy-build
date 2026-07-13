@@ -63,8 +63,11 @@ jobs:
 
           echo "✅ Found module for orgId '$ORG_ID': $MODULE"
 
-          # Set environment variables for later steps
-          echo "ACADEMY_NAME=${MODULE##*/}" >> $GITHUB_ENV
+          # Set environment variables for later steps.
+          # Strip an optional Go major-version suffix (e.g. /v2) so the academy
+          # name is the repo name (tcslabs-academy), not the version segment.
+          MODULE_PATH="${MODULE%/v[0-9]*}"
+          echo "ACADEMY_NAME=${MODULE_PATH##*/}" >> $GITHUB_ENV
           echo "NOTES=Updated from academy-build workflow" >> $GITHUB_ENV
 
           make update-module module="$MODULE" version="$VERSION"
