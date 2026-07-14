@@ -14,5 +14,6 @@ require (
 	github.com/layer5io/exoscale-academy v0.6.39 // indirect
 	github.com/layer5io/layer5-academy v0.8.22 // indirect
 	github.com/meshery-extensions/meshery-academy v0.4.29 // indirect
+	github.com/meshery-extensions/tcslabs-academy/v2 v2.1.10 // indirect
 	github.com/twbs/bootstrap v5.3.8+incompatible // indirect
 )
