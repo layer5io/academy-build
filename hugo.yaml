@@ -77,7 +77,7 @@ params:
   build: "production"
   
   academy:
-    validationMode: warn
+    validationMode: error
 
   taxonomy:
     # set taxonomyCloud = [] to hide taxonomy clouds
