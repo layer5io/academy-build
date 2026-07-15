@@ -306,6 +306,8 @@ github.com/meshery-extensions/tcslabs-academy/v2 v2.1.11 h1:6dWfQpC/GpjUA+06imhY
 github.com/meshery-extensions/tcslabs-academy/v2 v2.1.11/go.mod h1:CLxpPjGeoN9FSpMP4lEgzDXSstLN3Ip/LilBLKTbF3o=
 github.com/meshery-extensions/tcslabs-academy/v2 v2.2.0 h1:5S6IFdERfXk01JF07/lZtcuNelTIqpcLgz7W6dk/ylE=
 github.com/meshery-extensions/tcslabs-academy/v2 v2.2.0/go.mod h1:CLxpPjGeoN9FSpMP4lEgzDXSstLN3Ip/LilBLKTbF3o=
+github.com/meshery-extensions/tcslabs-academy/v2 v2.2.2 h1:nHgwi0YVRfoe9JivzTsr1qG7+isnL78TpevOF3pMtmA=
+github.com/meshery-extensions/tcslabs-academy/v2 v2.2.2/go.mod h1:CLxpPjGeoN9FSpMP4lEgzDXSstLN3Ip/LilBLKTbF3o=
 github.com/twbs/bootstrap v5.3.7+incompatible h1:ea1W8TOWZFkqSK2M0McpgzLiUQVru3bz8aHb0j/XtuM=
 github.com/twbs/bootstrap v5.3.7+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
