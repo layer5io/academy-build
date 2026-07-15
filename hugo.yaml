@@ -286,7 +286,7 @@ module:
           target: static/3e2f9c82-1a4c-4781-adf9-99ec22cd994e
           disableWatch: false
     
-    - path: github.com/meshery-extensions/tcslabs-academy
+    - path: github.com/meshery-extensions/tcslabs-academy/v2
       disable: false
 
       mounts:
