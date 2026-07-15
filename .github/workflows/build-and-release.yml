@@ -55,55 +55,19 @@ jobs:
           ORG_ID="${{ github.event.inputs.orgId }}"
           VERSION="${{ github.event.inputs.version || 'latest' }}"
 
-          # academy_config.json stores the BARE module path (no /vN suffix). The
-          # Semantic Import Versioning (SIV) suffix is derived here from the
-          # target version, so no academy needs to be hand-tagged with /v2.
+          # academy_config.json stores the BARE module path; 'make update-academy'
+          # derives the Go /vN suffix from the version and syncs hugo.yaml + go.mod.
+          # Here we only surface the academy name (repo name) for later steps.
           BASE=$(jq -r --arg orgId "$ORG_ID" '.orgToModuleMapping[$orgId].module' academy_config.json)
-
           if [ "$BASE" = "null" ] || [ -z "$BASE" ]; then
             echo "❌ Module not found for orgId: $ORG_ID"
             exit 1
           fi
-          # Defensively strip a legacy /vN suffix so either config form works.
           BASE="${BASE%/v[0-9]*}"
-
-          # Resolve "latest" to a concrete tag. Go/Hugo module resolution never
-          # crosses a major-version boundary on a bare path, so we must learn the
-          # real major before we can construct the import path.
-          if [ "$VERSION" = "latest" ] || [ -z "$VERSION" ]; then
-            VERSION=$(git ls-remote --tags --refs "https://${BASE}.git" \
-              | sed -E 's#.*refs/tags/##' \
-              | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' \
-              | sort -V | tail -n1)
-            if [ -z "$VERSION" ]; then
-              echo "❌ Could not resolve a latest semver tag for $BASE"
-              exit 1
-            fi
-            echo "Resolved latest -> $VERSION"
-          fi
-
-          # Derive the SIV-correct import path:
-          #   major >= 2 -> <base>/vN  (required by Go)
-          #   major 0|1  -> <base>     (no suffix)
-          MAJOR="${VERSION#v}"; MAJOR="${MAJOR%%.*}"
-          if [ "${MAJOR:-0}" -ge 2 ] 2>/dev/null; then
-            MODULE="${BASE}/v${MAJOR}"
-          else
-            MODULE="$BASE"
-          fi
-          echo "✅ orgId '$ORG_ID' -> import '$MODULE' @ '$VERSION'"
-
-          # Set environment variables for later steps (academy name = repo name).
           echo "ACADEMY_NAME=${BASE##*/}" >> $GITHUB_ENV
           echo "NOTES=Updated from academy-build workflow" >> $GITHUB_ENV
 
-          # Keep hugo.yaml's mount import path in sync with the derived path.
-          # Match this module's "- path: <base>[/vN]" line and rewrite it.
-          ESC_BASE=$(printf '%s' "$BASE" | sed -e 's/[.[\*^$/]/\\&/g')
-          sed -i -E "s|^([[:space:]]*- path: )${ESC_BASE}(/v[0-9]+)?[[:space:]]*\$|\1${MODULE}|" hugo.yaml
-
-          make update-module module="$MODULE" version="$VERSION"
-          make update-org-to-module-version orgId="$ORG_ID" version="$VERSION"
+          make update-academy orgId="$ORG_ID" version="$VERSION"
 
       - name: Set default environment variables
         if: ${{ github.event.inputs.orgId == '' }}

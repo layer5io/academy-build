@@ -128,6 +128,41 @@ update-org-to-module-version:
 	'.orgToModuleMapping[$$orgId].version = $$version' \
 	academy_config.json > tmp.json && mv tmp.json academy_config.json
 
+## [repo-specific] Update an org's academy to a module version end-to-end.
+## Reads the BARE module path from academy_config.json, derives the Go Semantic
+## Import Versioning (/vN) suffix from the target version, syncs hugo.yaml, and
+## updates go.mod + academy_config.json. version defaults to 'latest'.
+update-academy: check-go check-deps
+	@if [ -z "$(orgId)" ]; then \
+		echo "Usage: make update-academy orgId=<org-id> [version=<version>]"; \
+		exit 1; \
+	fi; \
+	ORG_ID="$(orgId)"; \
+	VERSION="$(version)"; \
+	if [ -z "$$VERSION" ]; then VERSION="latest"; fi; \
+	BASE=$$(jq -r --arg orgId "$$ORG_ID" '.orgToModuleMapping[$$orgId].module' academy_config.json); \
+	if [ "$$BASE" = "null" ] || [ -z "$$BASE" ]; then \
+		echo "❌ Module not found for orgId: $$ORG_ID"; exit 1; \
+	fi; \
+	BASE="$${BASE%/v[0-9]*}"; \
+	if [ "$$VERSION" = "latest" ]; then \
+		VERSION=$$(git ls-remote --tags --refs "https://$$BASE.git" \
+			| sed -E 's#.*refs/tags/##' \
+			| grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$$' \
+			| sort -V | tail -n1); \
+		if [ -z "$$VERSION" ]; then \
+			echo "❌ Could not resolve a latest semver tag for $$BASE"; exit 1; \
+		fi; \
+		echo "Resolved latest -> $$VERSION"; \
+	fi; \
+	MAJOR="$${VERSION#v}"; MAJOR="$${MAJOR%%.*}"; \
+	if [ "$${MAJOR:-0}" -ge 2 ] 2>/dev/null; then MODULE="$$BASE/v$$MAJOR"; else MODULE="$$BASE"; fi; \
+	echo "✅ orgId '$$ORG_ID' -> import '$$MODULE' @ '$$VERSION'"; \
+	ESC_BASE=$$(printf '%s' "$$BASE" | sed -e 's/[.[\*^$$/]/\\&/g'); \
+	sed -i -E "s|^([[:space:]]*- path: )$$ESC_BASE(/v[0-9]+)?[[:space:]]*\$$|\1$$MODULE|" hugo.yaml; \
+	$(MAKE) update-module module="$$MODULE" version="$$VERSION"; \
+	$(MAKE) update-org-to-module-version orgId="$$ORG_ID" version="$$VERSION"
+
 ## [repo-specific] Publish the built site to the Layer5 Cloud (../meshery-cloud/academy).
 sync-with-cloud:
 	@test -d ../meshery-cloud || { echo "Error: ../meshery-cloud sibling checkout not found."; exit 1; }
@@ -155,4 +190,5 @@ sync-with-cloud:
 	build-staging \
 	update-module \
 	update-org-to-module-version \
+	update-academy \
 	sync-with-cloud
