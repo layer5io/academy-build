@@ -26,4 +26,4 @@ The icon renders inline: {{< svg name="exoscale-icon" >}}
 
 To add your own SVG icons, place `.svg` files in the `assets/icons/` directory, or alongside `index.md` in a page bundle to keep them with the page that uses them.
 
-Use `src` when the file lives outside `assets/icons/` — for example an org-scoped directory like `assets/{org-id}/icons/`. Paths are relative to `assets/`, so leave that prefix off: a file at `assets/1e2a8e46-937c-47ea-ab43-5716e3bcab2e/icons/foo.svg` is referenced as `src="1e2a8e46-937c-47ea-ab43-5716e3bcab2e/icons/foo.svg"`. A build warning is logged if the file is found in neither location.
+Use `src` when the file lives outside `assets/icons/` — for example an org-scoped directory like `assets/{org-id}/icons/`. When resolved from `assets/`, paths are relative to `assets/`, so leave that prefix off: a file at `assets/1e2a8e46-937c-47ea-ab43-5716e3bcab2e/icons/foo.svg` is referenced as `src="1e2a8e46-937c-47ea-ab43-5716e3bcab2e/icons/foo.svg"`. When resolved from the page bundle, `src` is relative to the page bundle itself. A build warning is logged if the file is found in neither location.

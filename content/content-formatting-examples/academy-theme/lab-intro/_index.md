@@ -10,7 +10,7 @@ The `lab-intro` shortcode captures its inner content and stores it for output el
 
 ```text
 {{</* lab-intro */>}}
-Welcome to this hands-on lab. In this exercise, you will learn how to deploy a cloud native application using Kubernetes. By the end of this lab, you will be able to create a cluster, deploy workloads, and expose services.
+Welcome to this hands-on lab. In this exercise, you will learn how to deploy a cloud-native application using Kubernetes. By the end of this lab, you will be able to create a cluster, deploy workloads, and expose services.
 {{</* /lab-intro */>}}
 
 {{</* lab-outro */>}}
@@ -19,7 +19,7 @@ Welcome to this hands-on lab. In this exercise, you will learn how to deploy a c
 **Example:**
 
 {{< lab-intro >}}
-Welcome to this hands-on lab. In this exercise, you will learn how to deploy a cloud native application using Kubernetes. By the end of this lab, you will be able to create a cluster, deploy workloads, and expose services.
+Welcome to this hands-on lab. In this exercise, you will learn how to deploy a cloud-native application using Kubernetes. By the end of this lab, you will be able to create a cluster, deploy workloads, and expose services.
 {{< /lab-intro >}}
 
 {{< lab-outro >}}
