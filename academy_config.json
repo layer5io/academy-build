@@ -21,7 +21,7 @@
       "version": "v0.4.29"
     },
     "deea6061-b6be-49a9-ad1c-f1a5c32e1fa9": {
-      "module": "github.com/meshery-extensions/tcslabs-academy/v2",
+      "module": "github.com/meshery-extensions/tcslabs-academy",
       "version": "v2.2.2"
     }
   }
