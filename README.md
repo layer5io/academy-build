@@ -14,7 +14,7 @@
        align="left"
        style="margin-right:15px;" />
 
-  
+
 ## Update Academy Action
 
 
@@ -44,23 +44,38 @@ You can integrate this into your workflows after building your site or on versio
 The repository includes a `Makefile` for local site development and deployment tasks:
 
 ```bash
-# Verify Node.js and npm versions
+# Verify required commands and local dependencies are present
 make check-deps
 
 # Install site dependencies
 make setup
 
-# Start the local Hugo development server with drafts and future content
+# Start the local Hugo development server with live reload
 make site
 
-# Build the site locally
+# Serve the site once with the file watcher off (no live reload)
+make serve
+
+# Build the site locally with draft and future content enabled
 make build
 
-# Build the site and clean the destination directory
-make build-clean
+# Build the site for a deploy preview (honors DEPLOY_PRIME_URL)
+make build-preview
 
-# Clean the Hugo destination directory and restart local setup
+# Build the site using the Layer5 Cloud production URL
+make build-production
+
+# Empty the build cache, reinstall dependencies, and run the site locally
 make clean
+
+# Check Markdown for linting issues
+make lint
+
+# Fix Markdown linting issues
+make lint-fix
+
+# Check internal links in the built site
+make check-links
 
 # Verify Go is installed before starting the local site
 make check-go
@@ -68,11 +83,14 @@ make check-go
 # Update the academy-theme package to the latest version
 make theme-update
 
-# Build site for staging with the Layer5 Cloud staging URL
-make stg-build
+# Build the site with the Layer5 Cloud staging URL
+make build-staging
 
-# Build site for production with the Layer5 Cloud production URL
-make prod-build
+# Update a Hugo module to a specific version
+make update-module module=<module-path> version=<version>
+
+# Set an org's module version in academy_config.json
+make update-org-to-module-version orgId=<org-id> version=<version>
 
 # Sync the built site from public/ to ../meshery-cloud/academy
 make sync-with-cloud
@@ -118,7 +136,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-     
+
       - name: Call Layer5 Academy Update API
         uses: layer5io/academy-build@v0.1.5
         with:
