@@ -86,8 +86,28 @@ jobs:
           echo "ACADEMY_NAME=${ACADEMY_NAME:-Layer5 Academy}" >> $GITHUB_ENV
           echo "NOTES=${NOTES:-Build from academy-build workflow}" >> $GITHUB_ENV
 
+      # Reuse Hugo's processed resources (images, CSS) from the previous run, so
+      # images already encoded (e.g. WebP) are not re-encoded on every release.
+      # Hugo names these files by content hash, so a restored entry is never stale.
+      - name: Restore Hugo resources cache
+        uses: actions/cache/restore@v6
+        with:
+          path: resources/_gen
+          key: hugo-resources-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            hugo-resources-${{ runner.os }}-
+
       - name: Build Academy
         run: make build-production
+
+      # Saved right after the build so a failure in a later step does not lose it.
+      # 'build:production' runs Hugo with --gc, which prunes unused files first,
+      # so the cache does not grow with every run.
+      - name: Save Hugo resources cache
+        uses: actions/cache/save@v6
+        with:
+          path: resources/_gen
+          key: hugo-resources-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Pull changes from self master
         run: git pull origin master
